@@ -1,0 +1,25 @@
+*.iml
+.gradle
+/local.properties
+/.idea/caches
+/.idea/libraries
+/.idea/modules.xml
+/.idea/workspace.xml
+/.idea/navEditor.xml
+/.idea/assetWizardSettings.xml
+.DS_Store
+/build
+/captures
+.externalNativeBuild
+.cxx
+local.properties
+# 忽略所有模块的编译文件
+**/build/
+
+# 忽略 APK 安装包
+*.apk
+*.aab
+
+# 忽略应用签名密钥
+*.jks
+*.keystore
