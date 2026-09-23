@@ -1,3 +1,39 @@
 <resources>
     <string name="app_name">HealthApp</string>
+
+    <string name="nav_home">首页</string>
+    <string name="nav_exercise">运动</string>
+    <string name="nav_diet">饮食</string>
+    <string name="nav_sleep">睡眠</string>
+    <string name="nav_profile">资料</string>
+
+    <string name="home_title">今日概览</string>
+    <string name="home_subtitle">以下内容来自本机 Room 数据库，不使用模拟记录。</string>
+    <string name="home_exercise_label">今日运动</string>
+    <string name="home_calorie_label">今日摄入</string>
+    <string name="home_sleep_label">最近一晚睡眠</string>
+    <string name="home_loading">正在读取…</string>
+    <string name="home_no_exercise">尚未记录今天的运动</string>
+    <string name="home_no_diet">尚未记录今天的饮食</string>
+    <string name="home_no_sleep">尚未记录睡眠</string>
+    <string name="home_load_error">暂时无法读取数据</string>
+    <string name="home_exercise_count">已完成 %1$d 次运动</string>
+    <string name="home_calorie_total">%1$s kcal</string>
+    <string name="home_sleep_duration">%1$d 小时 %2$d 分钟</string>
+
+    <string name="exercise_title">运动</string>
+    <string name="exercise_description">记录实际运动，并单独管理每周计划和打卡。</string>
+    <string name="exercise_pending">待开发：动作库、运动记录、MET 热量估算、每周计划与打卡。</string>
+    <string name="diet_title">饮食</string>
+    <string name="diet_description">记录四种餐次的食物重量和营养摄入。</string>
+    <string name="diet_pending">待开发：食物库、搜索、营养计算、饮食记录与每日目标比较。</string>
+    <string name="sleep_title">睡眠</string>
+    <string name="sleep_description">保存完整入睡和起床时间，支持跨午夜记录。</string>
+    <string name="sleep_pending">待开发：睡眠记录编辑、时长计算和非医疗性质的目标评价。</string>
+    <string name="profile_title">个人资料</string>
+    <string name="profile_description">管理单用户资料、健康目标和本地 PIN。</string>
+    <string name="profile_pending">待开发：资料表单、目标编辑和本地 PIN 设置/解锁。</string>
+    <string name="extra_title">扩展功能</string>
+    <string name="extra_description">成员 6 的扩展功能入口，不占用五项主导航。</string>
+    <string name="extra_pending">待开发：固定规则目标建议、本地提醒、清除数据、跨模块测试与演示检查。</string>
 </resources>
