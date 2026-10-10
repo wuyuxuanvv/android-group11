@@ -12,7 +12,6 @@ import com.example.healthapp.model.ExercisePlan;
 import com.example.healthapp.model.ExerciseRecord;
 import com.example.healthapp.model.Food;
 import com.example.healthapp.model.FoodRecord;
-import com.example.healthapp.model.SleepRecord;
 import com.example.healthapp.model.UserProfile;
 
 @Database(
@@ -23,8 +22,7 @@ import com.example.healthapp.model.UserProfile;
                 ExercisePlan.class,
                 ExerciseCheckIn.class,
                 Food.class,
-                FoodRecord.class,
-                SleepRecord.class
+                FoodRecord.class
         },
         version = 1,
         exportSchema = false)
@@ -45,8 +43,6 @@ public abstract class AppDatabase extends RoomDatabase {
     public abstract FoodDao foodDao();
 
     public abstract FoodRecordDao foodRecordDao();
-
-    public abstract SleepRecordDao sleepRecordDao();
 
     public static AppDatabase getInstance(Context context) {
         if (instance == null) {

@@ -22,6 +22,11 @@ public interface ExerciseRecordDao {
     @Query("SELECT COUNT(*) FROM exercise_records WHERE record_date = :date")
     int countByDate(String date);
 
+    /** Sum of estimated burned calories for the gauge; returns 0.0 when no records. */
+    @Query("SELECT COALESCE(SUM(estimated_calories_kcal), 0) FROM exercise_records "
+            + "WHERE record_date = :date")
+    double getTotalCaloriesByDate(String date);
+
     @Insert
     long insert(ExerciseRecord record);
 

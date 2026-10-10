@@ -7,7 +7,6 @@ import android.os.Looper;
 import com.example.healthapp.common.DateTimeUtils;
 import com.example.healthapp.common.RepositoryCallback;
 import com.example.healthapp.model.DailyHealthSummary;
-import com.example.healthapp.model.SleepRecord;
 import com.example.healthapp.model.UserProfile;
 
 import java.util.ArrayList;
@@ -64,14 +63,6 @@ public final class HealthRepository {
         }, callback);
     }
 
-    /** Returns null when a profile has not yet been saved. */
-    public void getDailySleepGoalMinutes(RepositoryCallback<Integer> callback) {
-        submit(() -> {
-            UserProfile profile = database.userProfileDao().getProfile();
-            return profile == null ? null : profile.dailySleepGoalMinutes;
-        }, callback);
-    }
-
     public void getExerciseCountForDate(String date, RepositoryCallback<Integer> callback) {
         submit(() -> database.exerciseRecordDao().countByDate(date), callback);
     }
@@ -80,9 +71,9 @@ public final class HealthRepository {
         submit(() -> database.foodRecordDao().getTotalCaloriesByDate(date), callback);
     }
 
-    /** Returns null when no sleep record exists. */
-    public void getLatestSleepRecord(RepositoryCallback<SleepRecord> callback) {
-        submit(() -> database.sleepRecordDao().getLatest(), callback);
+    /** Estimated exercise burn for one day; 0.0 when no records. Feeds the home calorie gauge. */
+    public void getTotalExerciseCaloriesForDate(String date, RepositoryCallback<Double> callback) {
+        submit(() -> database.exerciseRecordDao().getTotalCaloriesByDate(date), callback);
     }
 
     public void getDailySummaries(String startDate, String endDate,
@@ -91,10 +82,9 @@ public final class HealthRepository {
             List<DailyHealthSummary> summaries = new ArrayList<>();
             for (String date : DateTimeUtils.datesBetweenInclusive(startDate, endDate)) {
                 int exerciseCount = database.exerciseRecordDao().countByDate(date);
-                double calories = database.foodRecordDao().getTotalCaloriesByDate(date);
-                SleepRecord sleep = database.sleepRecordDao().getLatestBySleepDate(date);
-                Integer sleepMinutes = sleep == null ? null : sleep.durationMinutes;
-                summaries.add(new DailyHealthSummary(date, exerciseCount, calories, sleepMinutes));
+                double intake = database.foodRecordDao().getTotalCaloriesByDate(date);
+                double burn = database.exerciseRecordDao().getTotalCaloriesByDate(date);
+                summaries.add(new DailyHealthSummary(date, exerciseCount, intake, burn));
             }
             return summaries;
         }, callback);

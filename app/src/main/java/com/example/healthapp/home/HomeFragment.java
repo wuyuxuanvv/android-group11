@@ -14,7 +14,6 @@ import com.example.healthapp.R;
 import com.example.healthapp.common.DateTimeUtils;
 import com.example.healthapp.common.RepositoryCallback;
 import com.example.healthapp.database.HealthRepository;
-import com.example.healthapp.model.SleepRecord;
 
 import java.util.Locale;
 
@@ -22,7 +21,6 @@ import java.util.Locale;
 public class HomeFragment extends Fragment {
     private TextView exerciseValue;
     private TextView calorieValue;
-    private TextView sleepValue;
     private HealthRepository repository;
 
     public HomeFragment() {
@@ -41,7 +39,6 @@ public class HomeFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         exerciseValue = view.findViewById(R.id.text_home_exercise_value);
         calorieValue = view.findViewById(R.id.text_home_calorie_value);
-        sleepValue = view.findViewById(R.id.text_home_sleep_value);
         repository = HealthRepository.getInstance(requireContext());
     }
 
@@ -87,27 +84,6 @@ public class HomeFragment extends Fragment {
                 showLoadError(calorieValue);
             }
         });
-
-        repository.getLatestSleepRecord(new RepositoryCallback<SleepRecord>() {
-            @Override
-            public void onSuccess(SleepRecord record) {
-                if (!isAdded() || sleepValue == null) {
-                    return;
-                }
-                if (record == null) {
-                    sleepValue.setText(R.string.home_no_sleep);
-                } else {
-                    int hours = record.durationMinutes / 60;
-                    int minutes = record.durationMinutes % 60;
-                    sleepValue.setText(getString(R.string.home_sleep_duration, hours, minutes));
-                }
-            }
-
-            @Override
-            public void onError(Throwable error) {
-                showLoadError(sleepValue);
-            }
-        });
     }
 
     private void showLoadError(TextView textView) {
@@ -120,7 +96,6 @@ public class HomeFragment extends Fragment {
     public void onDestroyView() {
         exerciseValue = null;
         calorieValue = null;
-        sleepValue = null;
         super.onDestroyView();
     }
 }

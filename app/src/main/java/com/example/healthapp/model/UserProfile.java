@@ -29,7 +29,4 @@ public class UserProfile {
 
     @ColumnInfo(name = "daily_calorie_goal_kcal")
     public double dailyCalorieGoalKcal;
-
-    @ColumnInfo(name = "daily_sleep_goal_minutes")
-    public int dailySleepGoalMinutes;
 }

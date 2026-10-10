@@ -34,15 +34,12 @@ public class ProfileFragment extends Fragment {
     private static final int MAX_WEEKLY_GOAL = 14;
     private static final double MIN_CALORIE_GOAL = 500;
     private static final double MAX_CALORIE_GOAL = 10000;
-    private static final int MIN_SLEEP_GOAL_MINUTES = 60;
-    private static final int MAX_SLEEP_GOAL_MINUTES = 1440;
 
     private EditText heightInput;
     private EditText weightInput;
     private EditText ageInput;
     private EditText exerciseGoalInput;
     private EditText calorieGoalInput;
-    private EditText sleepGoalInput;
     private RadioGroup genderGroup;
 
     public ProfileFragment() {
@@ -58,7 +55,6 @@ public class ProfileFragment extends Fragment {
         ageInput = view.findViewById(R.id.input_profile_age);
         exerciseGoalInput = view.findViewById(R.id.input_profile_exercise_goal);
         calorieGoalInput = view.findViewById(R.id.input_profile_calorie_goal);
-        sleepGoalInput = view.findViewById(R.id.input_profile_sleep_goal);
         genderGroup = view.findViewById(R.id.radio_profile_gender);
         Button saveButton = view.findViewById(R.id.button_profile_save);
 
@@ -95,7 +91,6 @@ public class ProfileFragment extends Fragment {
         ageInput.setText(String.valueOf(profile.age));
         exerciseGoalInput.setText(String.valueOf(profile.weeklyExerciseGoalCount));
         calorieGoalInput.setText(formatNumber(profile.dailyCalorieGoalKcal));
-        sleepGoalInput.setText(String.valueOf(profile.dailySleepGoalMinutes));
 
         if (getString(R.string.profile_gender_male).equals(profile.gender)) {
             genderGroup.check(R.id.radio_profile_gender_male);
@@ -122,11 +117,9 @@ public class ProfileFragment extends Fragment {
                 MIN_WEEKLY_GOAL, MAX_WEEKLY_GOAL);
         Double calorieGoal = readDouble(calorieGoalInput, R.string.profile_error_calorie_goal,
                 MIN_CALORIE_GOAL, MAX_CALORIE_GOAL);
-        Integer sleepGoal = readInt(sleepGoalInput, R.string.profile_error_sleep_goal,
-                MIN_SLEEP_GOAL_MINUTES, MAX_SLEEP_GOAL_MINUTES);
 
         if (height == null || weight == null || age == null
-                || exerciseGoal == null || calorieGoal == null || sleepGoal == null) {
+                || exerciseGoal == null || calorieGoal == null) {
             return; // The failing field already shows its error message.
         }
 
@@ -138,7 +131,6 @@ public class ProfileFragment extends Fragment {
         profile.gender = gender;
         profile.weeklyExerciseGoalCount = exerciseGoal;
         profile.dailyCalorieGoalKcal = calorieGoal;
-        profile.dailySleepGoalMinutes = sleepGoal;
 
         repository().saveUserProfile(profile, new RepositoryCallback<Long>() {
             @Override
@@ -217,7 +209,6 @@ public class ProfileFragment extends Fragment {
         ageInput.setError(null);
         exerciseGoalInput.setError(null);
         calorieGoalInput.setError(null);
-        sleepGoalInput.setError(null);
     }
 
     private void toast(int messageRes) {
