@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment;
 
 import com.example.healthapp.diet.DietFragment;
 import com.example.healthapp.exercise.ExerciseFragment;
+import com.example.healthapp.database.SeedData;
 import com.example.healthapp.home.HomeFragment;
 import com.example.healthapp.profile.ProfileFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -23,6 +24,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        // Fill the built-in exercise/food libraries once per install (async, no-op when done).
+        SeedData.seedIfEmpty(this);
 
         bottomNavigation = findViewById(R.id.bottom_navigation);
         bottomNavigation.setOnItemSelectedListener(item -> {
